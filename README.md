@@ -23,7 +23,7 @@ Description of your project.
 
 ## Live Demo
 
-Check out the live demo of the project [here](wait).
+Check out the live demo of the project [here](https://648c5f4fc98517106c9b31bc--sprightly-florentine-c9084f.netlify.app/profile).
 
 ## Project Structure
 
