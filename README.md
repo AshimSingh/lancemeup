@@ -21,6 +21,10 @@ Description of your project.
 2. Open your browser and navigate to: `http://localhost:3000`
 3. Explore the application and interact with its features.
 
+## Live Demo
+
+Check out the live demo of the project [here](https://your-live-demo-link.com).
+
 ## Project Structure
 
 - `src/`: Contains the main source code files.
