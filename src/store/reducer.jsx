@@ -1,12 +1,14 @@
 const initialState={
-    name:"Ram",
+    name:"",
     personal_detail:{
-        email:"thapaashim.ta@gmail.com",
+        email:"",
         phoneNumber:"",
         street:"",
         address:"",
-        work:""
+        work:"",
+        
     },
+    image:'',
     page:0
 }
 
@@ -18,6 +20,11 @@ const FormData =(state=initialState,action)=>{
             return{
                 ...state,
                 [action.payload.name]:action.payload.value
+            }
+        case "Image":
+            return{
+                ...state,
+                image:action.payload
             }
         // case "InsertList":
         //     console.log(action.payload.email)
@@ -34,7 +41,7 @@ const FormData =(state=initialState,action)=>{
         case 'DECREMENT_PAGE':
                     return{
                         ...state,
-                        page: state.page>=0?state.page-1:state,
+                        page: state.page>0?state.page-1:state.page,
                     }
             
         default:

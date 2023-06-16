@@ -1,11 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
-import {  useSelector } from 'react-redux'
-
+import {  useSelector,useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 const Preview = (props) => {
+  const dispatch =useDispatch()
+  const navigate =useNavigate()
   const {url}=props
   const name=useSelector((state)=>state.data.name)
-  
+  const image=useSelector((state)=>state.data.image)
+  console.log("preview ",image)
   const links=[
     {
       lin:"About",
@@ -27,7 +30,10 @@ const Preview = (props) => {
         <div className={url=='register'?'about grid  grid-cols-1 md:w-[100%] w-[90%] min-h-[50%] shadow-md rounded-lg p-5':'md:grid-cols-3 about grid  grid-cols-1 md:w-[100%] w-[90%] min-h-[50%] shadow-md rounded-lg p-5'}>
           <div className='col-1 flex items-center flex-col justify-center'>
            {/* <div className='bg-green-400 md:w-[80%] w-[95%]'> */}
-           <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80" className='w-[60%]'></img>
+           {image?<img className='w-[250px] h-[250px] rounded-full' alt='user' src={URL.createObjectURL(image)}></img>:
+           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYXNeW05OGMu4dgLwvR94x_kBUrj-ZGyIVKtF8EjQkwtF4gnLKWR_LO6puDAsj529vXwc&usqp=CAU" className='w-[60%]'></img>
+           }
+           
             <div  className=' w-[60%] mt-3'>
               <h1 className='text-gray-400 text-2xl'>Youtuber</h1>
               
@@ -41,7 +47,13 @@ const Preview = (props) => {
             <h1 className='text-blue-400 text-xl'>Web developer</h1>
             <h1 className='text-gray-400 text-xl mt-2'>Ratings: 5/10</h1>
             </div>
-            <div><button className='bg-blue-400 p-2 text-white'>Edit info</button></div>
+            <div><button className='bg-blue-400 p-2 text-white'
+              onClick={()=>{
+                  dispatch({type:"DECREMENT_PAGE"})
+                  navigate("/register")
+
+              }}  
+            >Edit info</button></div>
             </div>
           
             <div className={url=='register'?'mt-3':'mt-5'}>
@@ -73,13 +85,15 @@ const Preview = (props) => {
 }
 
 const Timeline=()=>{
+  const bio=useSelector((state)=>state.data.personal_detail.bio)
   return(
-    <div>hello ashim</div>
+    <div>{bio}</div>
   )
 }
 const Aboutcontent= ()=>{
+  
   const name=useSelector((state)=>state.data.name)
-  const personal_detail=useSelector((state)=>state.data.personal_detail)
+  const {email,address,street,phoneNumber}=useSelector((state)=>state.data.personal_detail)
   
   return(
 
@@ -95,15 +109,37 @@ const Aboutcontent= ()=>{
   <h1 className='text-blue-400  '>{name}</h1>
 
 </div>
+<div className='grid grid-cols-3 mt-2'>
+  <h1 className='text-gray-700 font-semibold   col-span-2'>Email</h1>
+  <h1 className='text-blue-400  '>{email}</h1>
+</div>
+
+<div className='grid grid-cols-3 mt-2'>
+  <h1 className='text-gray-700 font-semibold   col-span-2'>Address</h1>
+  <h1 className='text-blue-400  '>{address}</h1>
+</div>
+
+<div className='grid grid-cols-3 mt-2'>
+  <h1 className='text-gray-700 font-semibold   col-span-2'>Phone Number</h1>
+  <h1 className='text-blue-400  '>{phoneNumber}</h1>
+
+</div>
+
+<div className='grid grid-cols-3 mt-2'>
+  <h1 className='text-gray-700 font-semibold   col-span-2'>Street</h1>
+  <h1 className='text-blue-400  '>{street}</h1>
+
+</div>
 
 
-{Object.entries(personal_detail).map(([key, value]) => (
-        <div key={key} className='grid grid-cols-3 mt-2'>
-        <h1 className='text-gray-700 font-semibold   col-span-2'>{key}</h1>
-        <h1 className='text-blue-400  '>{value}</h1>
+{/* {Object.entries(personal_detail).map(([key, value]) => (
       
+      
+        <div key={key} className='grid grid-cols-3 mt-2'>
+         <h1 className='text-gray-700 font-semibold   col-span-2'>hello</h1>
+        <h1 className='text-blue-400 '>barbie</h1>
       </div>
-      ))}
+      ))} */}
 
 </div>
   )

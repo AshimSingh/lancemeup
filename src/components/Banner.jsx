@@ -1,22 +1,24 @@
 import React from 'react'
 
 const Banner = () => {
-    const heading ="Why Choose Atom Clean ?"
+    const heading ="Why Choose Lanceme Up ?"
     const card =[
         {
-            icon:"fa-solid fa-lock text-blue-400 text-8xl",
-            heading:"Professional Cleaners",
-            des:"All Whizz cleans are completed by professional cleaning companies and all cleaners have verified police checks, as well as supply their own equipment and products. Every clean booked via Whizz is fully insured."
+          
+            icon:"fa-solid fa-user-gear text-green-500 text-8xl ",
+            heading:"Professionals",
+            des:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
         },
         {
-            icon:"fa-solid fa-lock text-blue-400 text-8xl",
-            heading:"Professional Cleaners",
-            des:"All Whizz cleans are completed by professional cleaning companies and all cleaners have verified police checks, as well as supply their own equipment and products. Every clean booked via Whizz is fully insured."
+          
+            icon:"fa-solid fa-users text-green-600 text-8xl",
+            heading:"Team Support",
+            des:"ALorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
         },
         {
-            icon:"fa-solid fa-lock text-blue-400 text-8xl",
-            heading:"Professional Cleaners",
-            des:"All Whizz cleans are completed by professional cleaning companies and all cleaners have verified police checks, as well as supply their own equipment and products. Every clean booked via Whizz is fully insured."
+            icon:"fa-solid fa-lock text-green-600 text-8xl",
+            heading:"200+ Projects",
+            des:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
         },
     ]
   return (

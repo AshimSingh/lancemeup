@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Intro() {
   
   const [nav,showNav]=useState('nav1')
@@ -23,6 +24,7 @@ export default function Intro() {
                     </ul>
       </nav>
                   {nav=='nav1'?<Form/>:<TermCondition/>}
+                  <ToastContainer />
                     
     </>
   )
@@ -42,7 +44,16 @@ const Form=()=>{
   const handleClick=()=>{
     
     if(name=='' || name.length<3){
-      alert("Please fill form properly")
+      toast.error('Please Enter value carefully', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
     else{
       dispatch({type:"Insert",payload:{

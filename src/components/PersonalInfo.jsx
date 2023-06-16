@@ -7,14 +7,15 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function AdjustOrder() {
   const dispatch =useDispatch()
   
-  const {email,address,street,phoneNumber}=useSelector((state)=>state.data.personal_detail)
+  const {email,address,street,phoneNumber,bio,district}=useSelector((state)=>state.data.personal_detail)
+  const image=useSelector((state)=>state.data.image)
   const [personal_detail,setDetail]=useState({
-    email:'',
+    email:email,
     address:address,
-    street:"",
-    phoneNumber:"",
-    bio:"",
-    district:""
+    street:street,
+    phoneNumber:phoneNumber,
+    bio:bio,
+    district:district,
   })
   const districtOptions = [
     { value: 'achham', label: 'Achham' },
@@ -27,40 +28,42 @@ export default function AdjustOrder() {
     
     setDetail({...personal_detail,[name]:value})
     
-    if(personal_detail.address.length>3){
-      console.log(personal_detail.address)
-      
-      dispatch({type:"Insert",payload:{name:"personal_detail",value:personal_detail}})
-    }
-    
-    // const inputPhoneNumber = event.target.value;
-    // const validPhoneNumber = /^[0-9]{10}$/; // regular expression to validate input as a 10-digit number
-    // if (validPhoneNumber.test(inputPhoneNumber)) {
-    //   setPhoneNumber(inputPhoneNumber);
-    // }
     
   };
 
-  const [errors, setErrors] = useState({});
-  const validationErrors = {};
-  useEffect(()=>{
-    if(personal_detail.email.length<5){
-      setErrors({email:"Enter  email"})
-    }else{
-      setErrors({})
-    }
-  },[personal_detail.email])
+  const [errors, setErrors] = useState({check:""});
+  
+  // useEffect(()=>{
+  //   if(personal_detail.email.length<5){
+  //     setErrors({email:"Enter  email"})
+  //   }else{
+  //     setErrors({email:""})
+  //   }
+  // },[personal_detail.email])
+
+  // useEffect(()=>{
+  //   const validPhoneNumber = /^[0-9]{10}$/;
+  //   if(!validPhoneNumber.test(personal_detail.phoneNumber)){
+  //     setErrors({phone:"Enter Valid Number"})
+  //   }else{
+  //     setErrors({email:""})
+  //   }
+  // },[personal_detail.phoneNumber])
+
+  
   const validataion =(event)=>{
     event.preventDefault();
+    const validationErrors = {};
+    setErrors({})
     // const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{4,}$/i;
     // if (!emailRegex.test(personal_detail.email)) {
     //   validationErrors.email = 'Enter Valid email';
     // }
 
 
-    // if(personal_detail.email==""){
-    //   validationErrors.email = 'Enter Valid email';
-    // }
+    if(personal_detail.email==""){
+      validationErrors.email = 'Enter Valid email';
+    }
     const validPhoneNumber = /^[0-9]{10}$/;
     if(!validPhoneNumber.test(personal_detail.phoneNumber)){
       validationErrors.phone = 'Enter Valid Number';
@@ -74,6 +77,9 @@ export default function AdjustOrder() {
     if(personal_detail.district==""){
       validationErrors.district ="Please choose one"
     }
+    if(imag==''){
+      validationErrors.Image="Select your Profile Picture"
+    }
     
 
     if (Object.keys(validationErrors).length > 0) {
@@ -82,8 +88,6 @@ export default function AdjustOrder() {
       setErrors(validationErrors);
     } else {
       setErrors({})
-      console.log("aserr",errors)
-      
       console.log('Form submitted successfully');
       
     }
@@ -110,9 +114,9 @@ export default function AdjustOrder() {
 
     // }
     validataion(e)
-    if(errors=={}){
-      console.log(errors)
-      toast.error('Please Enter value carefully', {
+    if(Object.keys(errors).length===0){
+      console.log("errors toast",errors)
+      toast.success('Submitted Successfully', {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -122,9 +126,16 @@ export default function AdjustOrder() {
         progress: undefined,
         theme: "light",
         });
-    }
-    else{
-      toast.success('Sucessfully submitted', {
+
+
+        dispatch({type:"Insert",payload:{name:"personal_detail",value:personal_detail}})
+        dispatch({
+          type:"INCREMENT_PAGE",
+          })
+
+    }else{
+      console.log("sucess",errors)
+      toast.error('Please Enter value carefully', {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -138,7 +149,13 @@ export default function AdjustOrder() {
     
     
   };
-  const [img,selImg]=useState()
+  const [imag,selImg]=useState(image)
+  const handleImg=(event)=>{
+    const file = event.target.files[0]
+    dispatch({type:"Image",payload:file})
+    console.log(file)
+    selImg(file)
+  }
   
 
    
@@ -199,9 +216,10 @@ export default function AdjustOrder() {
 
 <div className="flex flex-col px-4 mt-2">
           <label  name='image'> Upload Profile Image</label>
-          <input type='file'></input>
-          
+          <input type='file' onChange={handleImg}></input>
+          {errors.Image ? <span className="error text-red-500">{errors.Image}</span>:""}
   </div>
+  
        
         
         {/* {error==true && personal_detail.username.length<=0?<h1 className='text-red-400 px-4'>Please enter street name</h1>:""} */}
