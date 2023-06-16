@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.nav{
+    color:#fff
+} 
+.active{
+    color: rgb(112, 252, 112);
+}
+.navmargin{
+    margin-top: 80px;
+}
+
+@media(max-width:764px){
+    .navmargin{
+        margin-top: 60px;
+    }
+}
