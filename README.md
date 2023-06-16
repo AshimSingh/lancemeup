@@ -23,7 +23,7 @@ Description of your project.
 
 ## Live Demo
 
-Check out the live demo of the project [here](https://your-live-demo-link.com).
+Check out the live demo of the project [here](wait).
 
 ## Project Structure
 
